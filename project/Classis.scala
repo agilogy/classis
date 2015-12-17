@@ -75,7 +75,8 @@ object Classis extends Build {
       val nexus = "http://188.166.95.201:8081/content/repositories/snapshots"
       if (isSnapshot.value) Some("snapshots"  at nexus)
       else publishTo.value
-    }
+    },
+    bintrayReleaseOnPublish := !isSnapshot.value
   )
 
   lazy val noPublishSettings = Seq(
