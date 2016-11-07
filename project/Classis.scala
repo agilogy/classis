@@ -13,10 +13,11 @@ object Classis extends BaseBuild {
     .settings(moduleName := "classis-monoid")
     .settings(commonSettings)
     .settings(testSettings)
-    .settings(version := "0.2.rc1")
+    .settings(version := "0.2")
 
   lazy val classisApplicative = project.in(file("applicative"))
     .settings(moduleName := "classis-applicative")
     .settings(commonSettings)
+    .settings(testSettings)
 
 }

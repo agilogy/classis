@@ -1,7 +1,7 @@
 import bintray.BintrayKeys._
 import sbt._
 import sbt.Keys._
-import scoverage.ScoverageSbtPlugin.ScoverageKeys
+import scoverage.ScoverageKeys._
 
 trait BaseBuild extends Build{
 
@@ -11,10 +11,21 @@ trait BaseBuild extends Build{
 
   lazy val buildSettings = Seq(
     organization := "com.agilogy",
-    scalaVersion := "2.11.7",
-    crossScalaVersions := Seq("2.10.6", "2.11.7"),
+    scalaVersion := "2.12.0",
+    crossScalaVersions := Seq("2.12.0","2.11.8","2.10.6"),
+    libraryDependencies += "com.github.mpilquist" %% "simulacrum" % "0.10.0",
     addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
-    libraryDependencies += "com.github.mpilquist" %% "simulacrum" % "0.8.0"
+    libraryDependencies ++= {
+      CrossVersion.partialVersion(scalaVersion.value) match {
+        // if scala 2.11+ is used, quasiquotes are merged into scala-reflect
+        case Some((2, scalaMajor)) if scalaMajor >= 11 => Seq()
+        // in Scala 2.10, quasiquotes are provided by macro paradise
+        case Some((2, 10)) =>
+          Seq(
+            "org.scalamacros" %% "quasiquotes" % "2.1.0" cross CrossVersion.binary
+          )
+      }
+    }
   )
 
   lazy val commonScalacOptions = Seq(
@@ -26,24 +37,31 @@ trait BaseBuild extends Build{
     //    "-language:implicitConversions",
     //    "-language:experimental.macros",
     "-unchecked",
-    "-Xlint",
     "-Yno-adapted-args",
     "-Ywarn-numeric-widen",
     "-Ywarn-value-discard",
     "-Xfuture",
     "-Xfatal-warnings",
-    "-Ywarn-dead-code",
-    "-Yinline-warnings" //??
+    "-Ywarn-dead-code"
     //    "-P:linter:disable:PreferIfToBooleanMatch"
   )
 
-  lazy val warnUnusedImport = Seq(
+  lazy val otherScalacOptions = Seq(
     scalacOptions ++= {
       CrossVersion.partialVersion(scalaVersion.value) match {
         case Some((2, 10)) =>
-          Seq()
-        case Some((2, n)) if n >= 11 =>
-          Seq("-Ywarn-unused-import")
+          Seq("-Xlint")
+        case Some((2, 11)) =>
+          Seq(
+            "-Xlint:_",
+            "-Ywarn-unused-import",
+            "-Yinline-warnings" //??
+          )
+        case Some((2,12)) =>
+          Seq(
+            "-Xlint:_",
+            "-Ywarn-unused-import"
+          )
       }
     },
     scalacOptions in (Compile, console) ~= {_.filterNot("-Ywarn-unused-import" == _)},
@@ -55,12 +73,12 @@ trait BaseBuild extends Build{
     libraryDependencies ++= Seq(
     ),
     testOptions in Test += Tests.Argument(TestFrameworks.ScalaTest, "-oDF")
-  ) ++ warnUnusedImport
+  ) ++ otherScalacOptions
 
   lazy val scoverageSettings = Seq(
-    ScoverageKeys.coverageMinimum := 60,
-    ScoverageKeys.coverageFailOnMinimum := false,
-    ScoverageKeys.coverageHighlighting := scalaBinaryVersion.value != "2.10"
+    coverageMinimum := 60,
+    coverageFailOnMinimum := false,
+    coverageHighlighting := scalaBinaryVersion.value != "2.10"
     //    ScoverageKeys.coverageExcludedPackages := "cats\\.bench\\..*"
   )
 

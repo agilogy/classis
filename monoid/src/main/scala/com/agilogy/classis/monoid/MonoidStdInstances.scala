@@ -2,8 +2,7 @@ package com.agilogy.classis.monoid
 
 import scala.collection.TraversableLike
 import scala.collection.generic.CanBuildFrom
-import scala.collection.immutable.{MapLike, NumericRange, Queue, Stack}
-import scala.language.{existentials, higherKinds}
+import scala.language.higherKinds
 
 trait MonoidStdInstancesLow {
   implicit def optionZeroInstance[T]:Zero[Option[T]] = new Zero[Option[T]] {
