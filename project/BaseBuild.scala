@@ -11,8 +11,8 @@ trait BaseBuild extends Build{
 
   lazy val buildSettings = Seq(
     organization := "com.agilogy",
-    scalaVersion := "2.12.0",
-    crossScalaVersions := Seq("2.12.0","2.11.8","2.10.6"),
+    scalaVersion := "2.12.2",
+    crossScalaVersions := Seq("2.12.2","2.11.8","2.10.6"),
     libraryDependencies += "com.github.mpilquist" %% "simulacrum" % "0.10.0",
     addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
     libraryDependencies ++= {
