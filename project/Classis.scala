@@ -7,10 +7,16 @@ object Classis extends BaseBuild {
     .settings(moduleName := "root")
     .settings(commonSettings)
     .settings(noPublishSettings)
-    .aggregate(classisMonoid,classisApplicative)
+    .aggregate(classisFunctor,classisMonoid,classisApplicative)
 
   lazy val classisMonoid = project.in(file("monoid"))
     .settings(moduleName := "classis-monoid")
+    .settings(commonSettings)
+    .settings(testSettings)
+    .settings(version := "0.2")
+
+  lazy val classisFunctor = project.in(file("functor"))
+    .settings(moduleName := "classis-functor")
     .settings(commonSettings)
     .settings(testSettings)
     .settings(version := "0.2")
@@ -19,5 +25,7 @@ object Classis extends BaseBuild {
     .settings(moduleName := "classis-applicative")
     .settings(commonSettings)
     .settings(testSettings)
+    .settings(version := "0.2")
+    .dependsOn(classisFunctor)
 
 }
