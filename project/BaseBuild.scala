@@ -15,6 +15,7 @@ trait BaseBuild extends Build{
     crossScalaVersions := Seq("2.12.2","2.11.8","2.10.6"),
     libraryDependencies += "com.github.mpilquist" %% "simulacrum" % "0.10.0",
     addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full),
+    addCompilerPlugin("org.spire-math" % "kind-projector" % "0.9.4" cross CrossVersion.binary),
     libraryDependencies ++= {
       CrossVersion.partialVersion(scalaVersion.value) match {
         // if scala 2.11+ is used, quasiquotes are merged into scala-reflect
