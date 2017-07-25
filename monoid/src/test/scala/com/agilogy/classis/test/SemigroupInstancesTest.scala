@@ -5,9 +5,10 @@ import org.scalatest.FunSpec
 
 import scala.collection.immutable.{HashMap, HashSet}
 
-class SemigroupInstancesTest extends FunSpec with TypeCheckedTripleEquals{
+import com.agilogy.classis.monoid.Semigroup.ops._
+import com.agilogy.classis.monoid.std.SemigroupStdInstances._
 
-  import com.agilogy.classis.monoid._
+class SemigroupInstancesTest extends FunSpec with TypeCheckedTripleEquals{
 
   it("should exist an instance for Option if the content is a Semigroup"){
     assert(Option.empty[Int].append(Option.empty[Int]) === None)

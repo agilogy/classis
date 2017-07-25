@@ -1,13 +1,14 @@
 package com.agilogy.classis.test
 
+import com.agilogy.classis.monoid.Zero
 import org.scalactic.TypeCheckedTripleEquals
 import org.scalatest.FunSpec
 
 import scala.collection.immutable.{HashMap, HashSet}
+import com.agilogy.classis.monoid.std.ZeroStdInstances._
 
 class ZeroStdInstancesTest extends FunSpec with TypeCheckedTripleEquals{
 
-  import com.agilogy.classis.monoid._
 
   it("should exist an instance for Option with whatever type inside"){
     assert(Zero[Option[java.sql.Connection]].zero === None)
@@ -35,6 +36,10 @@ class ZeroStdInstancesTest extends FunSpec with TypeCheckedTripleEquals{
 
   it("should exist an instance for HashMap"){
     assert(Zero[HashMap[String,Int]].zero === HashMap.empty[String,Int])
+  }
+
+  it("Zero2"){
+    assert(Zero2[Int].zero === 0)
   }
 
 }

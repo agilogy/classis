@@ -13,6 +13,9 @@ object Classis extends BaseBuild {
     .settings(moduleName := "classis-monoid")
     .settings(commonSettings)
     .settings(testSettings)
+    .settings(libraryDependencies ++= Seq(
+      "com.chuusai" %% "shapeless" % "2.3.2"
+    ))
     .settings(version := "0.2")
 
   lazy val classisFunctor = project.in(file("functor"))
