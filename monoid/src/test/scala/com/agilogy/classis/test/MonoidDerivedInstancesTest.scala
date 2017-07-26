@@ -5,6 +5,7 @@ import org.scalactic.TypeCheckedTripleEquals
 import org.scalatest.FunSpec
 import com.agilogy.classis.monoid.std.MonoidStdInstances._
 import com.agilogy.classis.monoid.Monoid.syntax._
+import shapeless.{::, HNil}
 
 case class Coords(x:Int, y:Int)
 
@@ -12,6 +13,14 @@ class MonoidDerivedInstancesTest extends FunSpec with TypeCheckedTripleEquals{
 
   it("fooo"){
     assert(List(1,2).append(List.empty) === List(1,2))
+  }
+
+  it("should derive a Zero instance for HLists") {
+    assert(Zero[Int :: HNil].zero === 0 :: HNil)
+  }
+
+  it("should derive a Zero instance for case classes"){
+    assert(Zero[Coords].zero === Coords(0,0))
   }
 
   it("should derive a monoid instance for a tuple"){

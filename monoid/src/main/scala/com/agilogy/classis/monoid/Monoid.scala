@@ -2,9 +2,7 @@ package com.agilogy.classis.monoid
 
 import scala.language.implicitConversions
 
-trait IMonoid[T] extends IZero[T] with ISemigroup[T]
-
-trait Monoid[T] extends IMonoid[T] with Zero[T] with Semigroup[T]
+trait Monoid[T] extends Zero[T] with Semigroup[T]
 
 object Monoid{
 
@@ -26,7 +24,7 @@ object Monoid{
 
   }
 
-  trait ToAllMonoidSyntax extends ToMonoidSyntax with Semigroup.ToAllSemigroupSyntax
+  trait ToAllMonoidSyntax extends ToMonoidSyntax with Zero.ToAllZeroSyntax with Semigroup.ToAllSemigroupSyntax
 
   object syntax extends ToAllMonoidSyntax
 

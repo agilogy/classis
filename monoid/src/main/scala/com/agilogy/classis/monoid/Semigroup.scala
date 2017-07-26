@@ -4,19 +4,13 @@ import shapeless.{::, HList, HNil, ProductTypeClass, ProductTypeClassCompanion}
 
 import scala.language.implicitConversions
 
-trait ISemigroup[T] extends Any with Serializable {
-
-  def append(x: T, y: T): T
-
-}
-
 /**
   * See https://github.com/xuwei-k/scalaz-prototype
   * See https://github.com/scalaz/scalaz/issues/1084
   * @tparam T
   */
 
-trait Semigroup[T] extends ISemigroup[T] {
+trait Semigroup[T] extends Any with Serializable {
 
   def append(x: T, y: T): T
 
@@ -29,6 +23,7 @@ object Semigroup extends ProductTypeClassCompanion[Semigroup] {
   trait Syntax[T]{
     def self:T
     def typeClassInstance:Semigroup[T]
+
     def append(y:T):T = typeClassInstance.append(self,y)
   }
 

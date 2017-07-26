@@ -61,7 +61,8 @@ trait BaseBuild extends Build{
         case Some((2,12)) =>
           Seq(
             "-Xlint:_",
-            "-Ywarn-unused-import" //,
+            "-Ywarn-unused-import" ,
+            "-Ypartial-unification"
 //            "-Xlog-implicits"
           )
       }
