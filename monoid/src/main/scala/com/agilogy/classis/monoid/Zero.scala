@@ -1,22 +1,20 @@
 package com.agilogy.classis.monoid
 
 import shapeless.{::, HList, HNil, ProductTypeClass, ProductTypeClassCompanion}
-import simulacrum._
-
-import scala.language.implicitConversions
 
 trait IZero[T]{
   def zero:T
 }
 
-@typeclass(excludeParents = List("IZero"))
 trait Zero[T] extends IZero[T]{
 
   def zero:T
 
 }
 
-object Zero extends ProductTypeClassCompanion[Zero] {
+object Zero extends ProductTypeClassCompanion[Zero]{
+
+  def apply[T](implicit instance:Zero[T]):Zero[T] = instance
 
   // The typeclass object must be defined here (in the companion object to the typeclass), not imported
   // The reason is that every ProductTypeClassCompanion includes 3 implicit defs by the same name. Therefore, importing
@@ -33,4 +31,6 @@ object Zero extends ProductTypeClassCompanion[Zero] {
   def create[T](z:T) = new Zero[T] {
     override def zero: T = z
   }
+
+
 }

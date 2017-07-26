@@ -1,7 +1,6 @@
 package com.agilogy.classis.monoid
 
 import shapeless.{::, HList, HNil, ProductTypeClass, ProductTypeClassCompanion}
-import simulacrum._
 
 import scala.language.implicitConversions
 
@@ -17,15 +16,36 @@ trait ISemigroup[T] extends Any with Serializable {
   * @tparam T
   */
 
-@typeclass(excludeParents = List("ISemigroup"))
 trait Semigroup[T] extends ISemigroup[T] {
 
-  // Adding the override keyboard breaks Simulacrum generated stuff
-  @op("append") def append(x: T, y: T): T
+  def append(x: T, y: T): T
 
 }
 
 object Semigroup extends ProductTypeClassCompanion[Semigroup] {
+
+  def apply[T](implicit instance:Semigroup[T]):Semigroup[T] = instance
+
+  trait Syntax[T]{
+    def self:T
+    def typeClassInstance:Semigroup[T]
+    def append(y:T):T = typeClassInstance.append(self,y)
+  }
+
+  trait ToSemigroupSyntax{
+
+    implicit def toSemigroupSyntax[T](target:T)(implicit tc:Semigroup[T]):Syntax[T] = new Syntax[T] {
+
+      override def self: T = target
+
+      override def typeClassInstance: Semigroup[T] = tc
+    }
+
+  }
+
+  trait ToAllSemigroupSyntax extends ToSemigroupSyntax
+
+  object syntax extends ToAllSemigroupSyntax
 
   object typeClass extends ProductTypeClass[Semigroup] {
 

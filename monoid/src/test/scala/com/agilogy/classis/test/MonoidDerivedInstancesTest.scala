@@ -4,7 +4,7 @@ import com.agilogy.classis.monoid.{Monoid, Semigroup, Zero}
 import org.scalactic.TypeCheckedTripleEquals
 import org.scalatest.FunSpec
 import com.agilogy.classis.monoid.std.MonoidStdInstances._
-import com.agilogy.classis.monoid.Semigroup.ops._
+import com.agilogy.classis.monoid.Monoid.syntax._
 
 case class Coords(x:Int, y:Int)
 

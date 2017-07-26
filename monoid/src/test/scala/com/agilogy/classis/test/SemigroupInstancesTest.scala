@@ -5,7 +5,7 @@ import org.scalatest.FunSpec
 
 import scala.collection.immutable.{HashMap, HashSet}
 
-import com.agilogy.classis.monoid.Semigroup.ops._
+import com.agilogy.classis.monoid.Semigroup.syntax._
 import com.agilogy.classis.monoid.std.SemigroupStdInstances._
 
 class SemigroupInstancesTest extends FunSpec with TypeCheckedTripleEquals{
