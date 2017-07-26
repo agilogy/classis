@@ -32,8 +32,6 @@ trait SemigroupStdInstances {
   implicit val stringSemigroupInstance:Semigroup[String] =
     Semigroup.create[String](_ + _)
 
-
-
 }
 
 object SemigroupStdInstances extends SemigroupStdInstances

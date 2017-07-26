@@ -38,8 +38,4 @@ class ZeroStdInstancesTest extends FunSpec with TypeCheckedTripleEquals{
     assert(Zero[HashMap[String,Int]].zero === HashMap.empty[String,Int])
   }
 
-  it("Zero2"){
-    assert(Zero2[Int].zero === 0)
-  }
-
 }

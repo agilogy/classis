@@ -5,8 +5,12 @@ import simulacrum._
 
 import scala.language.implicitConversions
 
-@typeclass
-trait Zero[T] {
+trait IZero[T]{
+  def zero:T
+}
+
+@typeclass(excludeParents = List("IZero"))
+trait Zero[T] extends IZero[T]{
 
   def zero:T
 

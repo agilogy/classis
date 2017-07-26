@@ -5,8 +5,22 @@ import simulacrum._
 
 import scala.language.implicitConversions
 
-@typeclass trait Semigroup[T] extends Any with Serializable {
+trait ISemigroup[T] extends Any with Serializable {
 
+  def append(x: T, y: T): T
+
+}
+
+/**
+  * See https://github.com/xuwei-k/scalaz-prototype
+  * See https://github.com/scalaz/scalaz/issues/1084
+  * @tparam T
+  */
+
+@typeclass(excludeParents = List("ISemigroup"))
+trait Semigroup[T] extends ISemigroup[T] {
+
+  // Adding the override keyboard breaks Simulacrum generated stuff
   @op("append") def append(x: T, y: T): T
 
 }
