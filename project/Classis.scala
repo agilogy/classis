@@ -52,6 +52,7 @@ object Classis extends BaseBuild {
     .settings(libraryDependencies ++= Seq(
       "com.chuusai" %% "shapeless" % "2.3.2"
     ))
+    .dependsOn(equal, laws, lawsTest % "test")
     .settings(version := "0.2")
 
   lazy val functor = project.in(file("functor"))

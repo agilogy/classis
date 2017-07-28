@@ -1,6 +1,8 @@
 package com.agilogy.classis.monoid
 
+import com.agilogy.classis.equal.{Equal, EqualBasedLaws}
 import shapeless.{::, HList, HNil, ProductTypeClass, ProductTypeClassCompanion}
+import EqualBasedLaws._
 
 import scala.language.implicitConversions
 
@@ -57,5 +59,9 @@ object Semigroup extends ProductTypeClassCompanion[Semigroup] {
   def create[T](a:(T,T) => T):Semigroup[T] = new Semigroup[T] {
     override def append(x: T, y: T): T = a(x,y)
   }
+
+  def laws[T: Equal](implicit typeClassInstance:Semigroup[T]) = Seq(
+    associative[T]("append", typeClassInstance.append)
+  )
 }
 

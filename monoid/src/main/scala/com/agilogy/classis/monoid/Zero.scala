@@ -67,7 +67,6 @@ object Zero extends { //ProductTypeClassCompanion[Zero]{
 
   def create[T](z:T) = new Zero[T] {
     override def zero: T = z
-    println(s"Created zero $this with zero being $z")
     if(s"$z" == "MyTrue") throw new Exception
   }
 
