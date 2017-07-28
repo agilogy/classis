@@ -19,12 +19,17 @@ trait BaseBuild extends Build{
     libraryDependencies ++= {
       CrossVersion.partialVersion(scalaVersion.value) match {
         // if scala 2.11+ is used, quasiquotes are merged into scala-reflect
-        case Some((2, scalaMajor)) if scalaMajor >= 11 => Seq()
+        case Some((2, scalaMajor)) if scalaMajor >= 12 => Seq(
+          "org.scala-lang" % "scala-reflect" % "2.12.2"
+        )
+        case Some((2, 11)) => Seq(
+          "org.scala-lang" % "scala-reflect" % "2.11.11"
+        )
         // in Scala 2.10, quasiquotes are provided by macro paradise
-        case Some((2, 10)) =>
-          Seq(
-            "org.scalamacros" %% "quasiquotes" % "2.1.0" cross CrossVersion.binary
-          )
+        case Some((2, 10)) => Seq(
+          "org.scala-lang" % "scala-reflect" % "2.10.6",
+          "org.scalamacros" %% "quasiquotes" % "2.1.0" cross CrossVersion.binary
+        )
       }
     }
   )
