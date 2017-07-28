@@ -7,46 +7,46 @@ object Classis extends BaseBuild {
     .settings(moduleName := "root")
     .settings(commonSettings)
     .settings(noPublishSettings)
-    .aggregate(classisLaws, classisEqual, classisOrder, classisFunctor,classisMonoid,classisApplicative)
+    .aggregate(laws, equal, order, functor, monoid, applicative)
 
-  lazy val classisLaws = project.in(file("laws"))
-    .settings(moduleName := "classis-laws")
+  lazy val laws = project.in(file("laws"))
+    .settings(moduleName := "laws")
     .settings(commonSettings)
     .settings(testSettings)
     .settings(version := "0.2")
 
-  lazy val classisLawsTest = project.in(file("lawsTest"))
-    .settings(moduleName := "classis-laws-test")
+  lazy val lawsTest = project.in(file("lawsTest"))
+    .settings(moduleName := "laws-test")
     .settings(commonSettings)
     .settings(testSettings)
     .settings(libraryDependencies ++= Seq(
       "org.scalacheck" %% "scalacheck" % "1.13.4"
     ))
-    .dependsOn(classisLaws)
+    .dependsOn(laws)
     .settings(version := "0.2")
 
-  lazy val classisEqual = project.in(file("equal"))
-    .settings(moduleName := "classis-equal")
+  lazy val equal = project.in(file("equal"))
+    .settings(moduleName := "equal")
     .settings(commonSettings)
     .settings(testSettings)
     .settings(libraryDependencies ++= Seq(
       "com.chuusai" %% "shapeless" % "2.3.2"
     ))
-    .dependsOn(classisLaws, classisLawsTest % "test")
+    .dependsOn(laws, lawsTest % "test")
     .settings(version := "0.2")
 
-  lazy val classisOrder = project.in(file("order"))
-    .settings(moduleName := "classis-order")
+  lazy val order = project.in(file("order"))
+    .settings(moduleName := "order")
     .settings(commonSettings)
     .settings(testSettings)
     .settings(libraryDependencies ++= Seq(
       "com.chuusai" %% "shapeless" % "2.3.2"
     ))
-    .dependsOn(classisLaws, classisLawsTest % "test", classisEqual)
+    .dependsOn(laws, lawsTest % "test", equal)
     .settings(version := "0.2")
 
-  lazy val classisMonoid = project.in(file("monoid"))
-    .settings(moduleName := "classis-monoid")
+  lazy val monoid = project.in(file("monoid"))
+    .settings(moduleName := "monoid")
     .settings(commonSettings)
     .settings(testSettings)
     .settings(libraryDependencies ++= Seq(
@@ -54,17 +54,17 @@ object Classis extends BaseBuild {
     ))
     .settings(version := "0.2")
 
-  lazy val classisFunctor = project.in(file("functor"))
-    .settings(moduleName := "classis-functor")
+  lazy val functor = project.in(file("functor"))
+    .settings(moduleName := "functor")
     .settings(commonSettings)
     .settings(testSettings)
     .settings(version := "0.2")
 
-  lazy val classisApplicative = project.in(file("applicative"))
-    .settings(moduleName := "classis-applicative")
+  lazy val applicative = project.in(file("applicative"))
+    .settings(moduleName := "applicative")
     .settings(commonSettings)
     .settings(testSettings)
     .settings(version := "0.2")
-    .dependsOn(classisFunctor)
+    .dependsOn(functor)
 
 }
