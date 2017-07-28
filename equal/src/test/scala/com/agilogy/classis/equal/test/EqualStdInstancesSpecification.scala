@@ -20,4 +20,10 @@ class EqualStdInstancesSpecification extends LawsSpecification("equal") {
   checkLaws(Equal.laws[Either[String,Int]])
 
   checkLaws(Equal.laws[(Long,Double)])
+
+  checkLaws(Equal.laws[List[Int]])
+  checkLaws(Equal.laws[Seq[Int]])
+  checkLaws(Equal.laws[Set[Int]])
+  checkLaws(Equal.laws[Map[Int,Char]])
+//  checkLaws(Equal.laws[Queue[Int]])
 }
