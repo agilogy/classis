@@ -1,29 +1,29 @@
 package com.agilogy.classis.equal.test
 
-import com.agilogy.classis.equal.Equal
 import com.agilogy.classis.laws.test.LawsSpecification
 import com.agilogy.classis.equal.std.EqualStdInstances._
 
 class EqualStdInstancesSpecification extends LawsSpecification("equal") {
 
-  checkLaws(Equal.laws[Boolean])
-  checkLaws(Equal.laws[Byte])
-  checkLaws(Equal.laws[Short])
-  checkLaws(Equal.laws[Int])
-  checkLaws(Equal.laws[Long])
-  checkLaws(Equal.laws[Float])
-  checkLaws(Equal.laws[Double])
-  checkLaws(Equal.laws[Char])
-  checkLaws(Equal.laws[String])
+  check(EqualLawsProperties[Boolean])
 
-  checkLaws(Equal.laws[Option[Int]])
-  checkLaws(Equal.laws[Either[String,Int]])
+  check(EqualLawsProperties[Byte])
+  check(EqualLawsProperties[Short])
+  check(EqualLawsProperties[Int])
+  check(EqualLawsProperties[Long])
+  check(EqualLawsProperties[Float])
+  check(EqualLawsProperties[Double])
+  check(EqualLawsProperties[Char])
+  check(EqualLawsProperties[String])
 
-  checkLaws(Equal.laws[(Long,Double)])
+  check(EqualLawsProperties[Option[Int]])
+  check(EqualLawsProperties[Either[String,Int]])
 
-  checkLaws(Equal.laws[List[Int]])
-  checkLaws(Equal.laws[Seq[Int]])
-  checkLaws(Equal.laws[Set[Int]])
-  checkLaws(Equal.laws[Map[Int,Char]])
-//  checkLaws(Equal.laws[Queue[Int]])
+  check(EqualLawsProperties[(Long,Double)])
+
+  check(EqualLawsProperties[List[Int]])
+  check(EqualLawsProperties[Seq[Int]])
+  check(EqualLawsProperties[Set[Int]])
+  check(EqualLawsProperties[Map[Int,Char]])
+////  check(EqualLawsProperties[Queue[Int]])
 }

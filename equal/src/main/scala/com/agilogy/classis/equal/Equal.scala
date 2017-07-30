@@ -1,13 +1,10 @@
 package com.agilogy.classis.equal
 
-import com.agilogy.classis.laws.Law
+import com.agilogy.classis.laws._
 import shapeless.{::, HList, HNil, ProductTypeClass, ProductTypeClassCompanion}
 
 import scala.language.implicitConversions
-import EqualBasedLaws._
 import com.agilogy.classis.equal.std.EqualStdInstances._
-
-import com.agilogy.classis.laws.Laws._
 
 trait Equal[T] {
 
@@ -64,5 +61,15 @@ object Equal extends ProductTypeClassCompanion[Equal] {
 
   def fromJavaEquals[T]: Equal[T] = create(_ == _)
 
-  def laws[T](implicit typeClassInstance:Equal[T]): Seq[Law[T]] = Seq(reflexive("equal", typeClassInstance.equal), commutative("equal", typeClassInstance.equal), transitive("equal", typeClassInstance.equal))
+  trait Laws[T]{
+    def typeClassInstance:Equal[T]
+    val reflexiveEqual: Law1[T] = Laws.reflexive("equal", typeClassInstance.equal)
+    val commutativeEqual: Law2[T, T] = EqualBasedLaws.commutative("equal", typeClassInstance.equal)
+    val transitiveEqual: Law3[T, T, T] = Laws.transitive("equal", typeClassInstance.equal)
+  }
+
+  def laws[T](implicit instance: Equal[T]) = new Laws[T] {
+    override def typeClassInstance: Equal[T] = instance
+  }
+
 }

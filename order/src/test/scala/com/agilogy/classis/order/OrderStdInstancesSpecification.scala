@@ -2,24 +2,26 @@ package com.agilogy.classis.order
 
 import com.agilogy.classis.laws.test.LawsSpecification
 import com.agilogy.classis.order.std.OrderStdInstances._
+import com.agilogy.classis.order.test.OrderLawsProperties
 import org.scalacheck.{Arbitrary, Gen}
 
 class OrderStdInstancesSpecification extends LawsSpecification("order") {
 
-  checkLaws(Order.laws[Boolean])
-  checkLaws(Order.laws[Byte])
-  checkLaws(Order.laws[Short])
-  checkLaws(Order.laws[Int])
-  checkLaws(Order.laws[Long])
-  checkLaws(Order.laws[Float])
-  checkLaws(Order.laws[Double])
+  check(OrderLawsProperties[Boolean])
+  check(OrderLawsProperties[Boolean])
+  check(OrderLawsProperties[Byte])
+  check(OrderLawsProperties[Short])
+  check(OrderLawsProperties[Int])
+  check(OrderLawsProperties[Long])
+  check(OrderLawsProperties[Float])
+  check(OrderLawsProperties[Double])
 
   implicit val orderingArbitrary: Arbitrary[Ordering] = Arbitrary(Gen.oneOf(Lt, Eq, Gt))
-  checkLaws(Order.laws[Ordering])
+  check(OrderLawsProperties[Ordering])
 
-  checkLaws(Order.laws[Option[Double]])
-  checkLaws(Order.laws[Either[Int, Double]])
+  check(OrderLawsProperties[Option[Double]])
+  check(OrderLawsProperties[Either[Int, Double]])
 
-  checkLaws(Order.laws[(Int, Double)])
+  check(OrderLawsProperties[(Int, Double)])
 
 }

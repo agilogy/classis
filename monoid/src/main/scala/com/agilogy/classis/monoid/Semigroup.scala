@@ -3,6 +3,7 @@ package com.agilogy.classis.monoid
 import com.agilogy.classis.equal.{Equal, EqualBasedLaws}
 import shapeless.{::, HList, HNil, ProductTypeClass, ProductTypeClassCompanion}
 import EqualBasedLaws._
+import com.agilogy.classis.laws.Law3
 
 import scala.language.implicitConversions
 
@@ -60,8 +61,17 @@ object Semigroup extends ProductTypeClassCompanion[Semigroup] {
     override def append(x: T, y: T): T = a(x,y)
   }
 
-  def laws[T: Equal](implicit typeClassInstance:Semigroup[T]) = Seq(
-    associative[T]("append", typeClassInstance.append)
-  )
+  trait Laws[T]{
+    def typeClassInstance:Semigroup[T]
+    // TODO: Make Semigroup[T] extend Equal[T]
+    // This implicit means we can't check the rules of a semigroup if it is not an equals.
+    // Therefore, every semigroup must be an equal
+    def associativeAppend(implicit eq:Equal[T]): Law3[T, T, T] = associative[T]("append", typeClassInstance.append)
+  }
+
+  def laws[T](implicit instance: Semigroup[T]) = new Laws[T] {
+    override def typeClassInstance: Semigroup[T] = instance
+  }
+
 }
 

@@ -1,22 +1,13 @@
 package com.agilogy.classis.laws.test
 
-import com.agilogy.classis.laws.{Law, Law1, Law2, Law3}
-import org.scalacheck.{Arbitrary, Properties}
-import org.scalacheck.Prop.forAll
-
-import scala.reflect.runtime.universe.TypeTag
+import org.scalacheck.Properties
 
 class LawsSpecification(name:String) extends Properties(name){
 
-  private val lst = implicitly[TypeTag[LawsSpecification]]
+  def propertyName[T](name:String, typeName:String):String = s"$name[$typeName]"
 
-  def checkLaws[T: Arbitrary: TypeTag](laws:Seq[Law[T]]): Unit = {
-    val tt = implicitly[TypeTag[T]].tpe.asSeenFrom(lst.tpe,lst.tpe.typeSymbol).dealias
-    laws.foreach {
-      case Law1(n, fns, c) => property(s"$n${fns.mkString("(",",",")")}($tt)") = forAll(c)
-      case Law2(n, fns, c) => property(s"$n${fns.mkString("(",",",")")}($tt)") = forAll(c)
-      case Law3(n, fns, c) => property(s"$n${fns.mkString("(",",",")")}($tt)") = forAll(c)
-    }
+  def check(lp:LawsProperties): Unit = lp.properties.foreach {
+    case (n, p) => property(propertyName(n,lp.typeName)) = p
   }
 
 }

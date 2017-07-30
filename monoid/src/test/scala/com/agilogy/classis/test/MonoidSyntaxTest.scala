@@ -1,6 +1,7 @@
 package com.agilogy.classis.test
 
 //import com.agilogy.classis.monoid.{Monoid, Semigroup, Zero}
+import com.agilogy.classis.equal.Equal
 import com.agilogy.classis.monoid.Monoid
 import org.scalatest.FunSpec
 
@@ -14,7 +15,9 @@ object MyBool{
 
 class MonoidSyntaxTest extends FunSpec {
 
-  implicit val fooMonoid = new Monoid[MyBool] {
+  implicit val myBoolEqual: Equal[MyBool] = Equal.fromJavaEquals[MyBool]
+
+  implicit val myBoolMonoid = new Monoid[MyBool] {
 
     override def zero: MyBool = MyBool.F
 

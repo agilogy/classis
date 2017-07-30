@@ -2,7 +2,7 @@ package com.agilogy.classis.monoid
 
 import com.agilogy.classis.equal.Equal
 import com.agilogy.classis.equal.EqualBasedLaws._
-import com.agilogy.classis.laws.Law
+import com.agilogy.classis.laws.Law1
 
 import scala.language.implicitConversions
 
@@ -41,9 +41,15 @@ object Monoid {
 
   }
 
-  def laws[T: Equal](implicit typeClassInstance:Monoid[T]):Seq[Law[T]] = Semigroup.laws[T] ++ Seq(
-    leftIdentity("append", "zero", typeClassInstance.append, typeClassInstance.zero),
-    rightIdentity("append", "zero", typeClassInstance.append, typeClassInstance.zero)
-  )
+  trait Laws[T] extends Semigroup.Laws[T]{
+    def typeClassInstance: Monoid[T]
+    def leftIdentityAppendZero(implicit eq:Equal[T]): Law1[T] = leftIdentity("append", "zero", typeClassInstance.append, typeClassInstance.zero)
+    def rightIdentityAppendZero(implicit eq:Equal[T]): Law1[T] = rightIdentity("append", "zero", typeClassInstance.append, typeClassInstance.zero)
+  }
+
+  def laws[T](implicit instance: Monoid[T]) = new Laws[T] {
+    override def typeClassInstance: Monoid[T] = instance
+  }
+
 
 }

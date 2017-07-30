@@ -1,10 +1,8 @@
 package com.agilogy.classis.order
 
 import com.agilogy.classis.equal.Equal
-import com.agilogy.classis.laws.Law
+import com.agilogy.classis.laws._
 import shapeless.{::, HList, HNil, ProductTypeClass, ProductTypeClassCompanion}
-
-import com.agilogy.classis.laws.Laws._
 
 import scala.language.implicitConversions
 
@@ -108,13 +106,17 @@ object Order extends ProductTypeClassCompanion[Order] {
     if (isLessThan(x, y)) Lt else if (isEqual(x, y)) Eq else Gt
   }
 
-  def laws[T](implicit typeClassInstance: Order[T]): Seq[Law[T]] = Equal.laws[T] ++ Seq(
-    transitive[T]("lteq", typeClassInstance.lteq),
-    total("lteq", typeClassInstance.lteq),
-    Law.law2[T]("antisymmetry", "lteq", "equal") { (x, y) =>
+  trait Laws[T] extends Equal.Laws[T]{
+    override def typeClassInstance: Order[T]
+    val transitiveLteq: Law3[T, T, T] = Laws.transitive[T]("lteq", typeClassInstance.lteq)
+    val totalLteq: Law2[T, T] = Laws.total[T]("lteq", typeClassInstance.lteq)
+    val antisymmetryLteqEqual: Law2[T, T] = Law.law2[T, T]("antisymmetry", "lteq", "equal") { (x, y) =>
       !(typeClassInstance.lteq(x, y) && typeClassInstance.lteq(y, x)) || typeClassInstance.equal(x, y)
     }
-  )
+  }
 
+  def laws[T](implicit instance: Order[T]):Laws[T] = new Laws[T] {
+    override def typeClassInstance: Order[T] = instance
+  }
 
 }

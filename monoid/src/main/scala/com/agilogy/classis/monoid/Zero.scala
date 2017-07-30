@@ -1,17 +1,19 @@
 package com.agilogy.classis.monoid
 
+import com.agilogy.classis.equal.Equal
 import shapeless.{::, Generic, HList, HNil, Lazy, ProductTypeClass}
 
 import scala.language.implicitConversions
+
+import Equal.syntax._
 
 trait Zero[T] {
 
   def zero:T
 
-  //TODO: Use Eq typeclass
-  def isEmpty(v:T):Boolean = {
+  def isEmpty(v:T)(implicit eq:Equal[T]):Boolean = {
     println(s"Is $v empty? true if it is $zero")
-    v == zero
+    v === zero
   }
 
 }
@@ -24,7 +26,7 @@ object Zero extends { //ProductTypeClassCompanion[Zero]{
     def self:T
     def typeClassInstance: Zero[T]
 
-    def isEmpty:Boolean = typeClassInstance.isEmpty(self)
+    def isEmpty(implicit eq:Equal[T]):Boolean = typeClassInstance.isEmpty(self)
   }
 
   trait ToZeroSyntax{
