@@ -1,11 +1,9 @@
-package com.agilogy.classis.functor.std.test
+package com.agilogy.classis.functor.test
 
-import com.agilogy.classis.functor.Functor
+import com.agilogy.classis.functor.Functor.syntax._
+import com.agilogy.classis.functor.std.FunctorStdInstances._
 import org.scalactic.TypeCheckedTripleEquals
 import org.scalatest.FunSpec
-
-import com.agilogy.classis.functor.std.FunctorStdInstances._
-import Functor.syntax._
 
 class FunctorStdInstancesTest extends FunSpec with TypeCheckedTripleEquals {
 

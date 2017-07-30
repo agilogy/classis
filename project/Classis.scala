@@ -59,6 +59,7 @@ object Classis extends BaseBuild {
     .settings(moduleName := "functor")
     .settings(commonSettings)
     .settings(testSettings)
+    .dependsOn(equal, laws, lawsTest % "test")
     .settings(version := "0.2")
 
   lazy val applicative = project.in(file("applicative"))
