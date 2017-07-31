@@ -1,5 +1,9 @@
 package com.agilogy.classis.applicative
 
+import com.agilogy.classis.equal.Equal
+import com.agilogy.classis.laws.{Law, Law1, Law2}
+import Equal.syntax._
+
 import scala.language.{higherKinds, implicitConversions}
 
 trait Applicative[F[_]] extends Pure[F] with Apply[F]{
@@ -7,7 +11,7 @@ trait Applicative[F[_]] extends Pure[F] with Apply[F]{
   def traverse[A,B](as: List[A])(f: A => F[B]): F[List[B]] =
     as.foldRight(pure(List[B]()))((a, fbs) => map2(f(a), fbs)(_ :: _))
 
-  override def map[A,B](fa: F[A])(f: A => B): F[B] = map2(fa, pure(()))((a, _) => f(a))
+  override def map[A, B](fa: F[A])(f: A => B): F[B] = applyU(pure(f), fa) //map2(fa, pure(()))((a, _) => f(a))
 
   def map2[F1,F2,FR](fa: F[F1], fb: F[F2])(f: (F1, F2) => FR): F[FR] = {
     applyU(map(fa)(f.curried),fb)
@@ -79,5 +83,33 @@ object Applicative{
   trait ToAllApplicativeSyntax extends ToApplicativeSyntax with Pure.ToPureSyntax with Apply.ToApplySyntax
 
   object syntax extends ToAllApplicativeSyntax
+
+  trait Laws[F[_]] extends Apply.Laws[F] {
+    override def typeClassInstance: Applicative[F]
+
+    def applicativePureIdIdentity[A](implicit eq: Equal[F[A]]): Law1[F[A]] = Law.law1[F[A]]("identity", "apply", "pure", "identity") { fa =>
+      typeClassInstance.apply(typeClassInstance.pure(identity[A] _))(fa) === fa
+    }
+
+    def applicativeHomomorphism[A, B](implicit eq: Equal[F[B]]): Law2[A, (A) => B] = Law.law2[A, A => B]("homomorphism", "apply", "pure") { (a, ab) =>
+      typeClassInstance.apply(typeClassInstance.pure(ab))(typeClassInstance.pure(a)) === typeClassInstance.pure(ab(a))
+    }
+
+    def applicativePureIdentity[A, B](implicit eq: Equal[F[B]]): Law2[F[(A) => B], A] = Law.law2("identity", "apply", "pure") { (fab, a) =>
+      typeClassInstance.apply(fab)(typeClassInstance.pure(a)) === typeClassInstance.apply(typeClassInstance.pure((f: A => B) => f(a)))(fab)
+    }
+
+    // This is only needed because an instance may overwrite the default map definition
+    // We could allow this (allow defining Applicative in terms of pure and map2 instead of pure and applicative)
+    // or forbid it by making map final (and then removing this law)
+    def applicativeMap[A, B](implicit eq: Equal[F[B]]): Law2[F[A], A => B] = Law.law2("applicativeMap") { (fa, f) =>
+      typeClassInstance.map(fa)(f) === typeClassInstance.apply(typeClassInstance.pure(f))(fa)
+    }
+
+  }
+
+  def laws[F[_]](implicit instance: Applicative[F]) = new Laws[F] {
+    override def typeClassInstance: Applicative[F] = instance
+  }
 
 }
