@@ -47,8 +47,8 @@ object Functor{
 
   trait Laws[F[_]]{
     def typeClassInstance: Functor[F]
-    def rightIdentityMapId[T](implicit fcEq:Equal[F[T]]): Law1[F[T]] = EqualBasedLaws.rightIdentity[F[T],T => T]("map","identity", (x, f) => typeClassInstance.map(x)(f), identity[T])
-    def compositeLaw[A,B,C](implicit eq:Equal[F[C]]): Law3[F[A], A => B, B => C] = Law3("composite",Seq("map","function.compose"),{
+    def functorIdentity[T](implicit fcEq:Equal[F[T]]): Law1[F[T]] = EqualBasedLaws.rightIdentity[F[T],T => T]("map","identity", (x, f) => typeClassInstance.map(x)(f), identity[T])
+    def functorComposite[A,B,C](implicit eq:Equal[F[C]]): Law3[F[A], A => B, B => C] = Law3("composite",Seq("map","function.compose"),{
       (x:F[A], f1: A =>B, f2: B => C) =>
         typeClassInstance.map(typeClassInstance.map(x)(f1))(f2) === typeClassInstance.map(x)(x => f2(f1(x)))
     })

@@ -66,7 +66,7 @@ object Classis extends BaseBuild {
     .settings(moduleName := "applicative")
     .settings(commonSettings)
     .settings(testSettings)
+    .dependsOn(functor, equal, laws, lawsTest % "test")
     .settings(version := "0.2")
-    .dependsOn(functor)
 
 }

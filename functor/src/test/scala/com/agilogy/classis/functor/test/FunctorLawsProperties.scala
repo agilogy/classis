@@ -20,8 +20,8 @@ class FunctorLawsProperties[F[_] : Functor, A: Arbitrary, B: Arbitrary, C: Arbit
   override def properties: LawChecks = {
     val laws = Functor.laws[F]
     Seq(
-      law2Property3(laws.compositeLaw[A, B, C]),
-      law2Property1(laws.rightIdentityMapId[A])
+      law2Property3(laws.functorComposite[A, B, C]),
+      law2Property1(laws.functorIdentity[A])
     )
   }
 
