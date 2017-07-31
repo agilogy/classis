@@ -23,8 +23,13 @@ trait ApplyStdInstances extends ApplyStdInstancesLow{
   private val optionApplyFunction = new Ap[Option] {
     override def apply[A, B](fab: Option[(A) => B])(fa: Option[A]): Option[B] = fab.flatMap(f => fa.map(f))
   }
-
   implicit lazy val optionApplyInstance: Apply[Option] = Apply.create[Option](optionApplyFunction, optionFunctorInstance)
+
+
+  private def eitherApplyFunction[L] = new Ap[Either[L,?]] {
+    override def apply[A, B](fab: Either[L,(A) => B])(fa: Either[L,A]): Either[L,B] = fab.flatMap(f => fa.map(f))
+  }
+  implicit def eitherApplyInstance[L]: Apply[Either[L,?]] = Apply.create(eitherApplyFunction[L], eitherFunctorInstance[L])
 
   implicit lazy val listApplyInstance:Apply[List] = Apply.create[List](traversableAp[List], traversableFunctorInstance[List])
   implicit lazy val seqApplyInstance:Apply[Seq] = Apply.create[Seq](traversableAp[Seq], traversableFunctorInstance[Seq])

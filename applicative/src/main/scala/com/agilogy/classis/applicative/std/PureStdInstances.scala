@@ -21,6 +21,10 @@ trait PureStdInstances extends PureStdInstancesLow{
     override def pure[A](a: => A): Option[A] = Some(a)
   }
 
+  implicit def eitherPureInstance[L] = new Pure[Either[L,?]] {
+    override def pure[A](a: => A): Either[L,A] = Right(a)
+  }
+
   implicit lazy val listPureInstance: Pure[List] = traversableLikePureInstance[List]
   implicit lazy val seqPureInstance: Pure[Seq] = traversableLikePureInstance[Seq]
   implicit lazy val setPureInstance: Pure[Set] = traversableLikePureInstance[Set]
