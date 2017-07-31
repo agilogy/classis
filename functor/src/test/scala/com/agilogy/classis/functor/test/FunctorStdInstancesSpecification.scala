@@ -12,7 +12,6 @@ class FunctorStdInstancesSpecification extends LawsSpecification("functor"){
 
   check(FunctorLawsProperties[List, Int, String, String])
   check(FunctorLawsProperties[Seq, Int, String, String])
-  check(FunctorLawsProperties[Set, Int, String, String])
 //  check(FunctorLawsProperties[Stream, Int, String, String])
 //  check(FunctorLawsProperties[Function0, Int, String, String])
 

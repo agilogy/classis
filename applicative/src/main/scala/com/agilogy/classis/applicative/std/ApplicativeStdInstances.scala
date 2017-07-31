@@ -18,7 +18,6 @@ trait ApplicativeStdInstances extends ApplicativeStdInstancesLow{
   implicit lazy val optionApplicativeInstance:Applicative[Option] = applicativeInstance[Option](optionPureInstance,optionApplyInstance)
   implicit lazy val listApplicativeInstance: Applicative[List] = applicativeInstance[List](listPureInstance,listApplyInstance)
   implicit lazy val seqApplicativeInstance: Applicative[Seq] = applicativeInstance[Seq](seqPureInstance,seqApplyInstance)
-  implicit lazy val setApplicativeInstance: Applicative[Set] = applicativeInstance[Set](setPureInstance,setApplyInstance)
 
 }
 

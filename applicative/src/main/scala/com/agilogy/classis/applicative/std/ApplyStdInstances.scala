@@ -28,7 +28,6 @@ trait ApplyStdInstances extends ApplyStdInstancesLow{
 
   implicit lazy val listApplyInstance:Apply[List] = Apply.create[List](traversableAp[List], traversableFunctorInstance[List])
   implicit lazy val seqApplyInstance:Apply[Seq] = Apply.create[Seq](traversableAp[Seq], traversableFunctorInstance[Seq])
-  implicit lazy val setApplyInstance:Apply[Set] = Apply.create[Set](traversableAp[Set], traversableFunctorInstance[Set])
 }
 
 object ApplyStdInstances extends ApplyStdInstances

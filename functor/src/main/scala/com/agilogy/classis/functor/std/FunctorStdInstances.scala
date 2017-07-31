@@ -24,7 +24,8 @@ trait FunctorStdInstances extends FunctorStdInstancesLow{
   
   implicit lazy val listFunctorInstance: Functor[List] = traversableFunctorInstance[List]
   implicit lazy val seqFunctorInstance: Functor[Seq] = traversableFunctorInstance[Seq]
-  implicit lazy val setFunctorInstance: Functor[Set] = traversableFunctorInstance[Set]
+  // There is no functor for Set (see http://typelevel.org/blog/2014/06/22/mapping-sets.html)
+  // implicit lazy val setFunctorInstance: Functor[Set] = traversableFunctorInstance[Set]
   implicit lazy val streamFunctorInstance: Functor[Stream] = traversableFunctorInstance[Stream]
 
   implicit val function0FunctorInstance:Functor[Function0] = new Functor[Function0] {
