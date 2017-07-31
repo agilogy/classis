@@ -10,7 +10,7 @@ import scala.reflect.runtime.universe.TypeTag
 
 class MonoidLawsProperties[T: Monoid: Arbitrary: TypeTag: Equal] extends LawsProperties{
 
-  override def typeName: String = implicitly[TypeTag[T]].tpe.dealias.toString
+  override def typeName: String = implicitly[TypeTag[T]].tpe.toString
 
   override def properties: LawChecks = {
     val laws = Monoid.laws[T]

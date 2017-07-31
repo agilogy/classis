@@ -15,9 +15,9 @@ trait LawsProperties {
 
   def name(l:Law):String = s"${l.name}(${l.functionNames.mkString(", ")})"
 
-  implicit protected def law2Property[A: Arbitrary](l:Law1[A]): (String, Prop) = name(l) -> forAll(l.check)
-  implicit protected def law2Property[A: Arbitrary, B: Arbitrary](l:Law2[A,B]): (String, Prop) = name(l) -> forAll(l.check)
-  implicit protected def law2Property[A: Arbitrary, B: Arbitrary, C: Arbitrary](l:Law3[A,B,C]): (String, Prop) = name(l) -> forAll(l.check)
+  implicit protected def law2Property1[A: Arbitrary](l:Law1[A]): (String, Prop) = name(l) -> forAll(l.check)
+  implicit protected def law2Property2[A: Arbitrary, B: Arbitrary](l:Law2[A,B]): (String, Prop) = name(l) -> forAll(l.check)
+  implicit protected def law2Property3[A: Arbitrary, B: Arbitrary, C: Arbitrary](l:Law3[A,B,C]): (String, Prop) = name(l) -> forAll(l.check)
 
   def properties: LawChecks
 }

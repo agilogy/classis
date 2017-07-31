@@ -16,7 +16,7 @@ class EqualLawsProperties[T: Equal: Arbitrary: TypeTag] extends LawsProperties{
     )
   }
 
-  override def typeName: String = implicitly[TypeTag[T]].tpe.dealias.toString
+  override def typeName: String = implicitly[TypeTag[T]].tpe.toString
 }
 
 object EqualLawsProperties{

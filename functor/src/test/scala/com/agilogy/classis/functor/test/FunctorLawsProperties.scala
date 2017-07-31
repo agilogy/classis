@@ -20,12 +20,12 @@ class FunctorLawsProperties[F[_] : Functor, A: Arbitrary, B: Arbitrary, C: Arbit
   override def properties: LawChecks = {
     val laws = Functor.laws[F]
     Seq(
-      law2Property(laws.compositeLaw[A, B, C]),
-      law2Property(laws.rightIdentityMapId[A])
+      law2Property3(laws.compositeLaw[A, B, C]),
+      law2Property1(laws.rightIdentityMapId[A])
     )
   }
 
-  override def typeName: String = tt.tpe.typeConstructor.dealias.toString
+  override def typeName: String = tt.tpe.typeConstructor.toString
 }
 
 object FunctorLawsProperties{
