@@ -19,8 +19,13 @@ trait FunctorStdInstancesLow {
 trait FunctorStdInstances extends FunctorStdInstancesLow{
 
   implicit val optionFunctorInstance = new Functor[Option] {
-    override def map[T1, T2](fa: Option[T1])(f: (T1) => T2): Option[T2] = fa.map(f)
+    override def map[T1, T2](fa: Option[T1])(f: T1 => T2): Option[T2] = fa.map(f)
   }
+
+  implicit def eitherFunctorInstance[L] = new Functor[Either[L,?]] {
+    override def map[A, B](fa: Either[L, A])(f: A => B): Either[L, B] = fa.map(f)
+  }
+
   
   implicit lazy val listFunctorInstance: Functor[List] = traversableFunctorInstance[List]
   implicit lazy val seqFunctorInstance: Functor[Seq] = traversableFunctorInstance[Seq]

@@ -9,6 +9,7 @@ import Equal.syntax._
 class FunctorStdInstancesSpecification extends LawsSpecification("functor"){
 
   check(FunctorLawsProperties[Option, Int, String, String])
+  check(FunctorLawsProperties[Either[Int,?], Int, String, String])
 
   check(FunctorLawsProperties[List, Int, String, String])
   check(FunctorLawsProperties[Seq, Int, String, String])
