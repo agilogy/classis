@@ -1,6 +1,7 @@
-package com.agilogy.classis.applicative.std
+package com.agilogy.classis.applicative
 
-import com.agilogy.classis.applicative.{Applicative, Apply, Pure}
+import com.agilogy.classis.apply.{Apply, ApplyStdInstances}
+import com.agilogy.classis.pure.{Pure, PureStdInstances}
 
 import scala.language.higherKinds
 

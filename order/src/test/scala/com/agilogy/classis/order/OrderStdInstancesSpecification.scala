@@ -1,7 +1,6 @@
 package com.agilogy.classis.order
 
 import com.agilogy.classis.laws.test.LawsSpecification
-import com.agilogy.classis.order.std.OrderStdInstances._
 import com.agilogy.classis.order.test.OrderLawsProperties
 import org.scalacheck.{Arbitrary, Gen}
 

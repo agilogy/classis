@@ -1,5 +1,7 @@
 package com.agilogy.classis.applicative
 
+import com.agilogy.classis.apply.Apply
+
 import scala.language.higherKinds
 
 object ApplicativeBuilderSyntax {

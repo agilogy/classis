@@ -1,6 +1,6 @@
 package com.agilogy.classis.applicative.test
 
-import com.agilogy.classis.applicative.Apply
+import com.agilogy.classis.apply.Apply
 import com.agilogy.classis.equal.Equal
 import com.agilogy.classis.laws.test.LawsProperties
 import org.scalacheck.Arbitrary

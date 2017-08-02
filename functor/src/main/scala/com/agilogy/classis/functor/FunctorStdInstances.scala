@@ -1,6 +1,4 @@
-package com.agilogy.classis.functor.std
-
-import com.agilogy.classis.functor.Functor
+package com.agilogy.classis.functor
 
 import scala.collection.TraversableLike
 import scala.language.higherKinds

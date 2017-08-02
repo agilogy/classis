@@ -3,12 +3,14 @@ package com.agilogy.classis.monoid
 import com.agilogy.classis.equal.Equal
 import com.agilogy.classis.equal.EqualBasedLaws._
 import com.agilogy.classis.laws.Law1
+import com.agilogy.classis.semigroup.Semigroup
+import com.agilogy.classis.zero.Zero
 
 import scala.language.implicitConversions
 
 trait Monoid[T] extends Zero[T] with Semigroup[T]
 
-object Monoid {
+object Monoid extends MonoidStdInstances{
 
   def apply[T](implicit instance: Monoid[T]): Monoid[T] = instance
 

@@ -1,10 +1,9 @@
-package com.agilogy.classis.applicative.std
+package com.agilogy.classis.apply
 
-import com.agilogy.classis.applicative.{Apply, Ap}
-import com.agilogy.classis.functor.std.{CanBuildSelf, FunctorStdInstances}
+import com.agilogy.classis.functor.{CanBuildSelf, FunctorStdInstances}
+import com.agilogy.classis.pure.PureStdInstances
 
 import scala.collection.TraversableLike
-
 import scala.language.higherKinds
 
 trait ApplyStdInstancesLow extends PureStdInstances with FunctorStdInstances{

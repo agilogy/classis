@@ -3,6 +3,8 @@ package com.agilogy.classis.applicative
 import com.agilogy.classis.equal.Equal
 import com.agilogy.classis.laws.{Law, Law1, Law2}
 import Equal.syntax._
+import com.agilogy.classis.apply.Apply
+import com.agilogy.classis.pure.Pure
 
 import scala.language.{higherKinds, implicitConversions}
 
@@ -53,7 +55,7 @@ trait Applicative[F[_]] extends Pure[F] with Apply[F]{
 
 }
 
-object Applicative{
+object Applicative extends ApplicativeStdInstances{
 
   def apply[F[_]](implicit instance: Applicative[F]):Applicative[F] = instance
 

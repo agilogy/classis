@@ -1,11 +1,10 @@
-package com.agilogy.classis.monoid
+package com.agilogy.classis.zero
 
 import com.agilogy.classis.equal.Equal
+import com.agilogy.classis.equal.Equal.syntax._
 import shapeless.{::, Generic, HList, HNil, Lazy, ProductTypeClass}
 
 import scala.language.implicitConversions
-
-import Equal.syntax._
 
 trait Zero[T] {
 
@@ -18,7 +17,7 @@ trait Zero[T] {
 
 }
 
-object Zero extends { //ProductTypeClassCompanion[Zero]{
+object Zero extends ZeroStdInstances { //with ProductTypeClassCompanion[Zero]{
 
   def apply[T](implicit instance:Zero[T]):Zero[T] = instance
 

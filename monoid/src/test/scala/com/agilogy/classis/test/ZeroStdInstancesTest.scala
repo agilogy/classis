@@ -1,11 +1,10 @@
 package com.agilogy.classis.test
 
-import com.agilogy.classis.monoid.Zero
+import com.agilogy.classis.zero.Zero
 import org.scalactic.TypeCheckedTripleEquals
 import org.scalatest.FunSpec
 
 import scala.collection.immutable.{HashMap, HashSet}
-import com.agilogy.classis.monoid.std.ZeroStdInstances._
 
 class ZeroStdInstancesTest extends FunSpec with TypeCheckedTripleEquals{
 

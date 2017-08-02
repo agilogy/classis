@@ -1,8 +1,7 @@
-package com.agilogy.classis.functor.std
+package com.agilogy.classis.functor
 
 import scala.collection.generic.CanBuildFrom
-
-import scala.language.{higherKinds,existentials}
+import scala.language.{existentials, higherKinds}
 
 // Directly from ScalaZ CanBuildAnySelf
 trait CanBuildSelf[CC[_]] {

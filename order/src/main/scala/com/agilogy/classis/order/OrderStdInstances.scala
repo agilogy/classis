@@ -1,6 +1,4 @@
-package com.agilogy.classis.order.std
-
-import com.agilogy.classis.order.{Eq, Gt, Lt, Order, Ordering}
+package com.agilogy.classis.order
 
 trait OrderStdInstances {
 

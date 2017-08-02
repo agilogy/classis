@@ -4,7 +4,6 @@ import com.agilogy.classis.laws._
 import shapeless.{::, HList, HNil, ProductTypeClass, ProductTypeClassCompanion}
 
 import scala.language.implicitConversions
-import com.agilogy.classis.equal.std.EqualStdInstances._
 
 trait Equal[T] {
 
@@ -14,7 +13,7 @@ trait Equal[T] {
 
 }
 
-object Equal extends ProductTypeClassCompanion[Equal] {
+object Equal extends ProductTypeClassCompanion[Equal] with EqualStdInstances{
 
   def apply[T](implicit instance: Equal[T]): Equal[T] = instance
 

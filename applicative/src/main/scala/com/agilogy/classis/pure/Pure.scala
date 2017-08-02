@@ -1,4 +1,4 @@
-package com.agilogy.classis.applicative
+package com.agilogy.classis.pure
 
 import scala.language.{higherKinds, implicitConversions}
 
@@ -8,7 +8,7 @@ trait Pure[F[_]] {
 
 }
 
-object Pure{
+object Pure extends PureStdInstances{
 
   def apply[F[_]](implicit instance: Pure[F]):Pure[F] = instance
 

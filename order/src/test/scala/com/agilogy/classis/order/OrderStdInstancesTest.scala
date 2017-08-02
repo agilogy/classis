@@ -2,7 +2,6 @@ package com.agilogy.classis.order
 
 import org.scalatest.{FunSpec, NonImplicitAssertions}
 
-import com.agilogy.classis.order.std.OrderStdInstances._
 import Order.syntax._
 import Order._
 
@@ -48,7 +47,6 @@ class OrderStdInstancesTest extends FunSpec with NonImplicitAssertions {
   }
 
   it("can be mixed with Equals") {
-    import com.agilogy.classis.equal.std.EqualStdInstances._
     import com.agilogy.classis.equal.Equal.syntax._
     assert("hola" === "hola")
     assert(new Example(1) < new Example(2))

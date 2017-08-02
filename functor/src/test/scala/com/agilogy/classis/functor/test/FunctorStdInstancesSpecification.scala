@@ -2,8 +2,6 @@ package com.agilogy.classis.functor.test
 
 import com.agilogy.classis.equal.Equal
 import com.agilogy.classis.laws.test.LawsSpecification
-import com.agilogy.classis.functor.std.FunctorStdInstances._
-import com.agilogy.classis.equal.std.EqualStdInstances._
 import Equal.syntax._
 
 class FunctorStdInstancesSpecification extends LawsSpecification("functor"){

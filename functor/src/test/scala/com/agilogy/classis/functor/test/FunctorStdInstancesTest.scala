@@ -1,7 +1,6 @@
 package com.agilogy.classis.functor.test
 
 import com.agilogy.classis.functor.Functor.syntax._
-import com.agilogy.classis.functor.std.FunctorStdInstances._
 import org.scalactic.TypeCheckedTripleEquals
 import org.scalatest.FunSpec
 

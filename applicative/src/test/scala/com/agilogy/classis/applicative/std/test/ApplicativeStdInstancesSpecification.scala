@@ -2,8 +2,7 @@ package com.agilogy.classis.applicative.std.test
 
 import com.agilogy.classis.applicative.test.ApplicativeLawsProperties
 import com.agilogy.classis.laws.test.LawsSpecification
-import com.agilogy.classis.applicative.std.ApplicativeStdInstances._
-import com.agilogy.classis.equal.std.EqualStdInstances._
+import com.agilogy.classis.applicative.ApplicativeStdInstances._
 
 class ApplicativeStdInstancesSpecification extends LawsSpecification("applicative"){
 

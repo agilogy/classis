@@ -1,9 +1,9 @@
-package com.agilogy.classis.applicative
+package com.agilogy.classis.apply
 
 import com.agilogy.classis.equal.Equal
+import com.agilogy.classis.equal.Equal.syntax._
 import com.agilogy.classis.functor.Functor
 import com.agilogy.classis.laws.Law3
-import Equal.syntax._
 
 import scala.language.{higherKinds, implicitConversions}
 
@@ -16,7 +16,7 @@ trait Apply[F[_]] extends Ap[F] with Functor[F]{
   def product[A, B](fa: F[A], fb: F[B]): F[(A, B)] = apply(map(fa)(a => (b: B) => (a, b)))(fb)
 }
 
-object Apply{
+object Apply extends ApplyStdInstances{
 
   def apply[F[_]](implicit instance: Apply[F]): Apply[F] = instance
 

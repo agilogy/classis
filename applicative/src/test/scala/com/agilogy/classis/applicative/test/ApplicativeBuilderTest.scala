@@ -4,8 +4,6 @@ import com.agilogy.classis.applicative.ApplicativeBuilder
 import com.agilogy.classis.applicative.ApplicativeBuilderSyntax
 import org.scalatest.FunSpec
 
-import com.agilogy.classis.applicative.std.ApplyStdInstances._
-
 class ApplicativeBuilderTest extends FunSpec {
 
   it("should build an ApplicativeBuilder") {

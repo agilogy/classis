@@ -1,9 +1,9 @@
-package com.agilogy.classis.monoid
+package com.agilogy.classis.semigroup
 
-import com.agilogy.classis.equal.{Equal, EqualBasedLaws}
-import shapeless.{::, HList, HNil, ProductTypeClass, ProductTypeClassCompanion}
-import EqualBasedLaws._
+import com.agilogy.classis.equal.EqualBasedLaws._
+import com.agilogy.classis.equal.Equal
 import com.agilogy.classis.laws.Law3
+import shapeless.{::, HList, HNil, ProductTypeClass, ProductTypeClassCompanion}
 
 import scala.language.implicitConversions
 
@@ -13,13 +13,13 @@ import scala.language.implicitConversions
   * @tparam T
   */
 
-trait Semigroup[T] extends Any with Serializable {
+trait Semigroup[T] extends Serializable {
 
   def append(x: T, y: T): T
 
 }
 
-object Semigroup extends ProductTypeClassCompanion[Semigroup] {
+object Semigroup extends ProductTypeClassCompanion[Semigroup] with SemigroupStdInstances {
 
   def apply[T](implicit instance:Semigroup[T]):Semigroup[T] = instance
 

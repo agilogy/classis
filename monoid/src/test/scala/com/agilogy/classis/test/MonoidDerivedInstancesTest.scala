@@ -1,10 +1,11 @@
 package com.agilogy.classis.test
 
-import com.agilogy.classis.monoid.{Monoid, Semigroup, Zero}
+import com.agilogy.classis.monoid.Monoid
 import org.scalactic.TypeCheckedTripleEquals
 import org.scalatest.FunSpec
-import com.agilogy.classis.monoid.std.MonoidStdInstances._
 import com.agilogy.classis.monoid.Monoid.syntax._
+import com.agilogy.classis.semigroup.Semigroup
+import com.agilogy.classis.zero.Zero
 import shapeless.{::, HNil}
 
 case class Coords(x:Int, y:Int)

@@ -1,10 +1,7 @@
-package com.agilogy.classis.monoid.std
-
-import com.agilogy.classis.monoid.Zero
+package com.agilogy.classis.zero
 
 import scala.collection.TraversableLike
 import scala.collection.generic.CanBuildFrom
-
 import scala.language.higherKinds
 
 trait ZeroStdInstances {

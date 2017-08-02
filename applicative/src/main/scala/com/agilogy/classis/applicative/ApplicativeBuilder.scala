@@ -1,5 +1,7 @@
 package com.agilogy.classis.applicative
 
+import com.agilogy.classis.apply.Apply
+
 import scala.language.higherKinds
 
 final class ApplicativeBuilder[M[_], A, B](a: M[A], b: M[B])(implicit ap: Apply[M]) {

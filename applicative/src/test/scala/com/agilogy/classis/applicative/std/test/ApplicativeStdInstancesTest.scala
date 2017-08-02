@@ -4,7 +4,7 @@ import com.agilogy.classis.applicative.Applicative
 import org.scalactic.TypeCheckedTripleEquals
 import org.scalatest.FunSpec
 
-import com.agilogy.classis.applicative.std.ApplicativeStdInstances._
+import com.agilogy.classis.applicative.ApplicativeStdInstances._
 
 class ApplicativeStdInstancesTest extends FunSpec with TypeCheckedTripleEquals{
 

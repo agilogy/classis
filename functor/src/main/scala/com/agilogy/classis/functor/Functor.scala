@@ -12,7 +12,7 @@ trait Functor[F[_]] extends Any with Serializable{
 
 }
 
-object Functor{
+object Functor extends FunctorStdInstances{
 
   def apply[F[_]](implicit instance:Functor[F]):Functor[F] = instance
 

@@ -1,7 +1,6 @@
 package com.agilogy.classis.equal.test
 
 import com.agilogy.classis.laws.test.LawsSpecification
-import com.agilogy.classis.equal.std.EqualStdInstances._
 
 class EqualStdInstancesSpecification extends LawsSpecification("equal") {
 

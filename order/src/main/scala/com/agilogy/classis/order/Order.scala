@@ -26,7 +26,7 @@ trait Order[T] extends Equal[T] {
 
 }
 
-object Order extends ProductTypeClassCompanion[Order] {
+object Order extends ProductTypeClassCompanion[Order] with OrderStdInstances{
 
   def apply[T](implicit instance: Order[T]): Order[T] = instance
 

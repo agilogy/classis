@@ -1,6 +1,5 @@
-package com.agilogy.classis.equal.std
+package com.agilogy.classis.equal
 
-import com.agilogy.classis.equal.Equal
 import scala.annotation.tailrec
 import scala.collection.TraversableLike
 

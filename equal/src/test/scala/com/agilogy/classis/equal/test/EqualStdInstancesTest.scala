@@ -3,7 +3,6 @@ package com.agilogy.classis.equal.test
 import com.agilogy.classis.equal.Equal
 import org.scalatest.{FunSpec, NonImplicitAssertions}
 import Equal.syntax._
-import com.agilogy.classis.equal.std.EqualStdInstances._
 
 case class Coords(x:Int, y:Int)
 

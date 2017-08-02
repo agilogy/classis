@@ -1,7 +1,6 @@
 package com.agilogy.classis.applicative.std.test
 
-import com.agilogy.classis.applicative.Pure
-import com.agilogy.classis.applicative.std.PureStdInstances._
+import com.agilogy.classis.pure.Pure
 import org.scalactic.TypeCheckedTripleEquals
 import org.scalatest.FunSpec
 
