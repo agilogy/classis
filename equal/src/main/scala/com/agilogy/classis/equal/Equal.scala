@@ -25,6 +25,9 @@ object Equal extends ProductTypeClassCompanion[Equal] with EqualStdInstances{
     def ===(y: T): Boolean = typeClassInstance.equal(self, y)
 
     def !==(y: T): Boolean = typeClassInstance.notEqual(self, y)
+
+    override def toString: String = self.toString
+
   }
 
   trait ToEqSyntax {
@@ -34,6 +37,7 @@ object Equal extends ProductTypeClassCompanion[Equal] with EqualStdInstances{
       override def self: T = target
 
       override def typeClassInstance: Equal[T] = instance
+
     }
   }
 
