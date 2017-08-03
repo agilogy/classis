@@ -7,7 +7,7 @@ object Classis extends BaseBuild {
     .settings(moduleName := "root")
     .settings(commonSettings)
     .settings(noPublishSettings)
-    .aggregate(laws, equal, order, functor, monoid, applicative)
+    .aggregate(laws, equal, order, functor, monoid, applicative, monad)
 
   lazy val laws = project.in(file("laws"))
     .settings(moduleName := "laws")
@@ -67,6 +67,13 @@ object Classis extends BaseBuild {
     .settings(commonSettings)
     .settings(testSettings)
     .dependsOn(functor, equal, laws, lawsTest % "test")
+    .settings(version := "0.2")
+
+  lazy val monad = project.in(file("monad"))
+    .settings(moduleName := "monad")
+    .settings(commonSettings)
+    .settings(testSettings)
+    .dependsOn(applicative, equal, laws, lawsTest % "test")
     .settings(version := "0.2")
 
 }
