@@ -10,6 +10,8 @@ trait Functor[F[_]] extends Any with Serializable{
 
   def map[A, B](fa: F[A])(f: A => B): F[B]
 
+  def lift[A,B](fab: A => B): F[A] => F[B] = fa => map(fa)(fab)
+
 }
 
 object Functor extends FunctorStdInstances{
@@ -22,6 +24,12 @@ object Functor extends FunctorStdInstances{
 
     def map[B](f: A => B): F[B] = typeClassInstance.map(self)(f)
     def fmap[B](f: A => B): F[B] = map(f)
+  }
+
+  trait LiftSyntax[A, B]{
+    def self:A => B
+
+    def lift[F[_]](implicit instance:Functor[F]): F[A] => F[B] = instance.lift(self)
   }
 
   trait ToFunctorSyntax{
@@ -37,6 +45,10 @@ object Functor extends FunctorStdInstances{
       override def self: F[A, B] = target
 
       override def typeClassInstance: Functor[F[A,?]] = instance
+    }
+
+    implicit def toFunctorLiftSyntax[A, B](target: A=>B): LiftSyntax[A, B] = new LiftSyntax[A, B] {
+      override def self: A => B = target
     }
 
   }

@@ -13,4 +13,9 @@ class FunctorStdInstancesTest extends FunSpec with TypeCheckedTripleEquals {
     assert(f3.tupled.map(_ + 1)((4,5)) === 4*5+1)
   }
 
+  it("should lift any function to a functor"){
+    val f: Int => Int = _ + 3
+    assert(f.lift[List].apply(List(3,4)) === List(6,7))
+  }
+
 }
