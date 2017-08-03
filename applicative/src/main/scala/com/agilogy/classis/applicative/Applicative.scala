@@ -110,7 +110,7 @@ object Applicative extends ApplicativeStdInstances{
 
   }
 
-  def laws[F[_]](implicit instance: Applicative[F]) = new Laws[F] {
+  def laws[F[_]](implicit instance: Applicative[F]): Laws[F] = new Laws[F] {
     override def typeClassInstance: Applicative[F] = instance
   }
 
