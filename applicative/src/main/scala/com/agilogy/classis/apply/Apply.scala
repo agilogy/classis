@@ -23,7 +23,8 @@ object Apply extends ApplyStdInstances{
   trait Syntax[F[_],A]{
     def self: F[A]
     def typeClassInstance: Apply[F]
-    def product[B](fb:F[B]):F[(A,B)] = typeClassInstance.product(self,fb)
+
+    def applyProduct[B](fb:F[B]):F[(A,B)] = typeClassInstance.product(self,fb)
   }
 
   trait ToApplySyntax{

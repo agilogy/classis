@@ -4,7 +4,9 @@ import com.agilogy.classis.equal.Equal
 import com.agilogy.classis.laws.{Law, Law1, Law2}
 import Equal.syntax._
 import com.agilogy.classis.apply.Apply
+import com.agilogy.classis.apply.Apply.ToAllApplySyntax
 import com.agilogy.classis.pure.Pure
+import com.agilogy.classis.pure.Pure.ToAllPureSyntax
 
 import scala.language.{higherKinds, implicitConversions}
 
@@ -82,7 +84,7 @@ object Applicative extends ApplicativeStdInstances{
 
   }
 
-  trait ToAllApplicativeSyntax extends ToApplicativeSyntax with Pure.ToPureSyntax with Apply.ToApplySyntax
+  trait ToAllApplicativeSyntax extends ToApplicativeSyntax with ToAllPureSyntax with ToAllApplySyntax
 
   object syntax extends ToAllApplicativeSyntax
 
